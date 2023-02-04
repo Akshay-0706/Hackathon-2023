@@ -1,7 +1,9 @@
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:hackathon/backend/auth/account.dart';
+import 'package:hackathon/backend/Auth/account.dart';
+import 'package:hackathon/backend/Auth/database.dart';
 import 'package:lottie/lottie.dart';
 
 import '../../../backend/auth/user_account.dart';
@@ -17,6 +19,7 @@ class WelcomeBody extends StatefulWidget {
 }
 
 class _WelcomeBodyState extends State<WelcomeBody> {
+  FirebaseDatabase databaseRef = FirebaseDatabase.instance;
   // Future<SharedPreferences> sharedPreferences = SharedPreferences.getInstance();
   // late SharedPreferences pref;
   final box = GetStorage();
