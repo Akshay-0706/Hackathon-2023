@@ -13,5 +13,5 @@ Map<String, WidgetBuilder> routes = {
   "/": (context) => const Splash(),
   "/welcome": (context) => const Welcome(),
   "/NewPost": (context) => const NewPost(),
-  "/tab4": (context) => const LeaderBoard(),
+  "/screen": (context) => const Screen(),
 };

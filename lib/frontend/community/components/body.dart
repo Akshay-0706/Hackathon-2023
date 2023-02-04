@@ -1,10 +1,7 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:hackathon/backend/Auth/database.dart';
-import 'package:hackathon/frontend/community/components/newpost.dart';
 import 'package:hackathon/theme.dart';
 
 class CommunityPageBody extends StatefulWidget {
@@ -26,7 +23,6 @@ class _CommunityPageBodyState extends State<CommunityPageBody> {
 
   @override
   void initState() {
-    // TODO: implement initState
     getData();
     super.initState();
   }

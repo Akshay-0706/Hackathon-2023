@@ -127,6 +127,9 @@ class _WelcomeBodyState extends State<WelcomeBody> {
                           box.write('email', user.email);
                           box.write('id', user.id);
                           box.write('signedIn', true);
+
+                          Database.setData(
+                              databaseRef, user.email, user.name, user.photo);
                         }
                         Navigator.pushReplacementNamed(context, "/screen");
                       } else {

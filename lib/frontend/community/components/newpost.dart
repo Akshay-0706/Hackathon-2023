@@ -3,14 +3,10 @@ import 'dart:io';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter_overlay_loader/flutter_overlay_loader.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:hackathon/backend/Auth/database.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:loader_overlay/loader_overlay.dart';
 
 class NewPost extends StatefulWidget {
   const NewPost({super.key});
