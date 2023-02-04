@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:hackathon/frontend/community/community.dart';
 import 'package:hackathon/frontend/challenges/challenges.dart';
 import 'package:hackathon/frontend/donations/donations.dart';
 import 'package:hackathon/frontend/news/news.dart';
@@ -21,7 +22,7 @@ class _HomeBodyState extends State<HomeBody> {
 
   final List<Widget> tabs = [
     const HomeContent(),
-    const News(),
+    const CommunityPage(),
     const Challenges(),
     const Donations(),
   ];

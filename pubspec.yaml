@@ -56,6 +56,10 @@ dependencies:
   url_launcher: ^6.1.8
   palette_generator: ^0.3.3+2
   syncfusion_flutter_charts: ^20.4.48
+  image_picker: ^0.8.6+1
+  firebase_storage: ^11.0.10
+  loader_overlay: ^2.1.0
+  flutter_overlay_loader: ^2.0.0
 
 dev_dependencies:
   flutter_test:

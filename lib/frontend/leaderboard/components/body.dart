@@ -26,10 +26,11 @@ class _LeaderBoardBodyState extends State<LeaderBoardBody> {
         await Database.getBalance(databaseRef, "akshay0706vhatkar@gmail.com");
     print('data shown');
     print(data);
-    setState(() {
-      progress = data['progress'];
-      level = data['level'];
-    });
+    if (mounted)
+      setState(() {
+        progress = data['progress'];
+        level = data['level'];
+      });
   }
 
   @override
