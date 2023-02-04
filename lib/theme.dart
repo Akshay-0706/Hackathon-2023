@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
 
-// class ThemeChanger with ChangeNotifier {
-//   bool isDarkMode = true;
-//   String theme = "Auto";
+class ThemeChanger with ChangeNotifier {
+  bool isDarkMode = true;
+  String theme = "Auto";
 
-//   ThemeMode currentTheme() {
-//     return theme == "Auto"
-//         ? ThemeMode.system
-//         : theme == "Dark"
-//             ? ThemeMode.dark
-//             : ThemeMode.light;
-//   }
+  ThemeMode currentTheme() {
+    return theme == "Auto"
+        ? ThemeMode.system
+        : theme == "Dark"
+            ? ThemeMode.dark
+            : ThemeMode.light;
+  }
 
-//   void changeThemeMode(String theme) {
-//     this.theme = theme;
-//     notifyListeners();
-//   }
-// }
+  void changeThemeMode(String theme) {
+    this.theme = theme;
+    notifyListeners();
+  }
+}
 
 class AppTheme {
   static ThemeData lightTheme() {
@@ -49,8 +49,8 @@ class AppTheme {
       ),
       scaffoldBackgroundColor: CustomColors.backgroundDark,
       backgroundColor: CustomColors.backgroundDark,
-      colorScheme:
-          const ColorScheme.dark().copyWith(secondary: CustomColors.primaryDark),
+      colorScheme: const ColorScheme.dark()
+          .copyWith(secondary: CustomColors.primaryDark),
       primaryColor: CustomColors.primaryDark,
       primaryColorLight: CustomColors.foregroundAltDark,
       primaryColorDark: CustomColors.foregroundDark,
@@ -60,16 +60,22 @@ class AppTheme {
 
 class CustomColors {
   // Light mode colors
-  static Color primary = const Color(0xff5E00F5);
-  static Color foreground = const Color(0xff1C1C23);
-  static Color foregroundAlt = Colors.black;
-  static Color background = const Color(0xffFCF7F8);
+  static Color primary = const Color(0xFF37B80F);
+  // static Color foreground = const Color(0xff1C1C23);
+  static Color foreground = const Color(0xff262D2A);
+  // static Color foregroundAlt = Colors.black;
+  static Color foregroundAlt = const Color(0xFF272D2A);
+  // static Color background = const Color(0xffFCF7F8);
+  static Color background = const Color(0xffDEFAEC);
 
   // Dark mode colors
-  static Color? primaryDark = const Color(0xff5E00F5);
-  static Color foregroundDark = const Color(0xffFCF7F8);
-  static Color foregroundAltDark = const Color(0xffD2D2D2);
-  static Color backgroundDark = const Color(0xff1C1C23);
+  static Color? primaryDark = Color(0xFF37B80F);
+  // static Color foregroundDark = const Color(0xffFCF7F8);
+  static Color foregroundDark = const Color(0xffDEFAEC);
+  // static Color foregroundAltDark = const Color(0xffD2D2D2);
+  static Color foregroundAltDark = const Color(0xFFE7FAF1);
+  // static Color backgroundDark = const Color(0xff1C1C23);
+  static Color backgroundDark = const Color(0xff262D2A);
 }
 
 class Pallete {

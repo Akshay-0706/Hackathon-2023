@@ -5,7 +5,7 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:hackathon/frontend/home/home.dart';
 import 'package:hackathon/frontend/side_menu/side_menu.dart';
-import 'package:hackathon/global.dart';
+import 'package:hackathon/const.dart';
 import 'package:hackathon/size.dart';
 import 'package:hackathon/theme.dart';
 
@@ -94,23 +94,9 @@ class _ScreenState extends State<Screen> with SingleTickerProviderStateMixin {
                   });
                 },
                 borderRadius: BorderRadius.circular(17),
-                child: Container(
-                  width: getWidth(34),
-                  height: getWidth(34),
-                  decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: pallete.primaryDark(),
-                      boxShadow: [
-                        BoxShadow(
-                          color: pallete.primaryDark().withOpacity(0.5),
-                          offset: const Offset(0, 1),
-                          blurRadius: 8,
-                        )
-                      ]),
-                  child: Icon(
-                    Icons.menu,
-                    color: pallete.background(),
-                  ),
+                child: Icon(
+                  isSideMenuClosed ? Icons.menu : Icons.close,
+                  color: isSideMenuClosed ?  pallete.primaryDark() : pallete.background(),
                 ),
               ),
             )

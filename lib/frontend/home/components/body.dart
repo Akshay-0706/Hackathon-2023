@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hackathon/frontend/side_menu/side_menu.dart';
+import 'package:hackathon/frontend/tab_1/tab_1.dart';
 import 'package:hackathon/size.dart';
 import 'package:hackathon/theme.dart';
 
@@ -15,7 +16,7 @@ class _HomeBodyState extends State<HomeBody> {
   int current = 0;
 
   final List<Widget> tabs = [
-    const SideMenu(),
+    const Tab1(),
   ];
 
   void onChanged(int index) {
@@ -71,17 +72,11 @@ class _HomeBodyState extends State<HomeBody> {
                 pallete: pallete,
                 onChanged: onChanged,
               ),
-              NavItem(
-                index: 4,
-                current: current,
-                pallete: pallete,
-                onChanged: onChanged,
-              ),
             ],
           ),
         ),
       ),
-      body: Container(),
+      body: Tab1(),
     );
   }
 }
@@ -97,7 +92,7 @@ class NavItem extends StatelessWidget {
   final int index, current;
   final Pallete pallete;
   final Function onChanged;
-  final int totalItems = 5;
+  final int totalItems = 4;
 
   @override
   Widget build(BuildContext context) {

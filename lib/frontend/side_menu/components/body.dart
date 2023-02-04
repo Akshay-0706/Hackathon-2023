@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:hackathon/global.dart';
+import 'package:hackathon/const.dart';
 
 import '../../../size.dart';
 import '../../../theme.dart';
