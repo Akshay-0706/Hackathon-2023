@@ -25,16 +25,16 @@ class AppTheme {
       brightness: Brightness.light,
       appBarTheme: AppBarTheme(
         elevation: 0,
-        backgroundColor: Global.background,
-        iconTheme: IconThemeData(color: Global.foreground),
+        backgroundColor: CustomColors.background,
+        iconTheme: IconThemeData(color: CustomColors.foreground),
       ),
-      scaffoldBackgroundColor: Global.background,
-      backgroundColor: Global.background,
+      scaffoldBackgroundColor: CustomColors.background,
+      backgroundColor: CustomColors.background,
       colorScheme:
-          const ColorScheme.light().copyWith(secondary: Global.primary),
-      primaryColor: Global.primary,
-      primaryColorLight: Global.foregroundAlt,
-      primaryColorDark: Global.foreground,
+          const ColorScheme.light().copyWith(secondary: CustomColors.primary),
+      primaryColor: CustomColors.primary,
+      primaryColorLight: CustomColors.foregroundAlt,
+      primaryColorDark: CustomColors.foreground,
     );
   }
 
@@ -44,21 +44,21 @@ class AppTheme {
       brightness: Brightness.dark,
       appBarTheme: AppBarTheme(
         elevation: 0,
-        backgroundColor: Global.backgroundDark,
-        iconTheme: IconThemeData(color: Global.foregroundDark),
+        backgroundColor: CustomColors.backgroundDark,
+        iconTheme: IconThemeData(color: CustomColors.foregroundDark),
       ),
-      scaffoldBackgroundColor: Global.backgroundDark,
-      backgroundColor: Global.backgroundDark,
+      scaffoldBackgroundColor: CustomColors.backgroundDark,
+      backgroundColor: CustomColors.backgroundDark,
       colorScheme:
-          const ColorScheme.dark().copyWith(secondary: Global.primaryDark),
-      primaryColor: Global.primaryDark,
-      primaryColorLight: Global.foregroundAltDark,
-      primaryColorDark: Global.foregroundDark,
+          const ColorScheme.dark().copyWith(secondary: CustomColors.primaryDark),
+      primaryColor: CustomColors.primaryDark,
+      primaryColorLight: CustomColors.foregroundAltDark,
+      primaryColorDark: CustomColors.foregroundDark,
     );
   }
 }
 
-class Global {
+class CustomColors {
   // Light mode colors
   static Color primary = const Color(0xff5E00F5);
   static Color foreground = const Color(0xff1C1C23);

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:hackathon/frontend/tab_1/tab_1.dart';
+import 'package:hackathon/frontend/side_menu/side_menu.dart';
 import 'package:hackathon/size.dart';
 import 'package:hackathon/theme.dart';
 
@@ -15,7 +15,7 @@ class _HomeBodyState extends State<HomeBody> {
   int current = 0;
 
   final List<Widget> tabs = [
-    const Tab1(),
+    const SideMenu(),
   ];
 
   void onChanged(int index) {
@@ -40,9 +40,9 @@ class _HomeBodyState extends State<HomeBody> {
             borderRadius: BorderRadius.circular(24),
             boxShadow: [
               BoxShadow(
-                  offset: Offset(0, 3),
+                  offset: const Offset(0, 3),
                   blurRadius: 8,
-                  color: pallete.primaryDark().withOpacity(0.3)),
+                  color: pallete.background().withOpacity(0.5)),
             ],
           ),
           child: Row(
@@ -81,7 +81,7 @@ class _HomeBodyState extends State<HomeBody> {
           ),
         ),
       ),
-      body: Tab1(),
+      body: Container(),
     );
   }
 }
@@ -105,7 +105,7 @@ class NavItem extends StatelessWidget {
     return InkWell(
       onTap: () => onChanged(index),
       borderRadius: BorderRadius.circular(24),
-      child: Container(
+      child: SizedBox(
         width: itemWidth,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

@@ -79,7 +79,7 @@ class _WelcomeBodyState extends State<WelcomeBody> {
                     box.write('id', user.id);
                     box.write('signedIn', true);
                   }
-                  Navigator.pushReplacementNamed(context, "/home");
+                  Navigator.pushReplacementNamed(context, "/screen");
                 });
               },
             ),

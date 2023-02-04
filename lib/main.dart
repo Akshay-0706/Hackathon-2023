@@ -59,16 +59,11 @@ Future main() async {
 
       try {
         await flutterLocalNotificationsPlugin.initialize(
-          InitializationSettings(
+          const InitializationSettings(
             android: AndroidInitializationSettings('@mipmap/ic_launcher'),
           ),
         );
-      } on Exception catch (e, s) {
-        print('akfkf');
-        print(e);
-        print(s);
-        // TODO
-      }
+      } on Exception catch (e) {}
 
       try {
         await flutterLocalNotificationsPlugin.show(
@@ -77,12 +72,7 @@ Future main() async {
           message.notification!.body,
           notificationDetails,
         );
-      } catch (e, s) {
-        print('akfkf2');
-        print(e);
-        print(s);
-        // TODO
-      }
+      } catch (e) {}
     }
   });
 
