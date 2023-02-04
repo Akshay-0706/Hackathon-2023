@@ -119,7 +119,7 @@ class _WelcomeBodyState extends State<WelcomeBody> {
                       signin = true;
                     });
                     UserAccount.googleLogin().then((value) {
-                      Account? user = value;
+                      Account? user = value as Account?;
                       if (user != null) {
                         if (!signedIn || box.read('email') != user.email) {
                           box.write('name', user.name);
