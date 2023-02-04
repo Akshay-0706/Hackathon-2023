@@ -8,136 +8,144 @@ import 'package:get_storage/get_storage.dart';
 import 'package:hackathon/size.dart';
 import 'package:hackathon/theme.dart';
 
-class Tab1Body extends StatelessWidget {
-  const Tab1Body({super.key});
+class HomeContentBody extends StatelessWidget {
+  const HomeContentBody({super.key});
 
   @override
   Widget build(BuildContext context) {
     final box = GetStorage();
     Pallete pallete = Pallete(context);
     return SafeArea(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: Stack(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 20),
-              child: Row(
-                children: [
-                  const Spacer(),
-                  InkWell(
-                    onTap: () {
-                      print("Tap");
-                    },
-                    borderRadius: BorderRadius.circular(17),
-                    child: Icon(
-                      Icons.notifications_rounded,
-                      color: pallete.primaryDark(),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            SingleChildScrollView(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const SizedBox(height: 70),
-                  Text(
-                    "Hello, ${box.read('name').toString().split(" ")[0]} 👋",
-                    style: TextStyle(
-                      color: pallete.primaryDark(),
-                      fontSize: getWidth(20),
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  Text(
-                    "What did you do sustainable today?",
-                    style: TextStyle(
-                      color: pallete.primaryDark(),
-                      fontSize: getWidth(16),
-                    ),
-                  ),
-                  const SizedBox(height: 20),
-                  Text(
-                    "Your Daily Score",
-                    style: TextStyle(
-                      color: pallete.primaryDark(),
-                      fontSize: getWidth(20),
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const SizedBox(height: 10),
-                  SizedBox(
-                    height: 8,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(8),
-                      child: LinearProgressIndicator(
-                        value: 0.3,
-                        color: pallete.primary(),
-                        backgroundColor: pallete.primaryDark().withOpacity(0.4),
+      child: TweenAnimationBuilder(
+        tween: Tween<double>(begin: 0, end: 1),
+        duration: const Duration(milliseconds: 500),
+        builder: (context, double opacity, child) => Opacity(
+          opacity: opacity,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Stack(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(top: 20),
+                  child: Row(
+                    children: [
+                      const Spacer(),
+                      InkWell(
+                        onTap: () {
+                          print("Tap");
+                        },
+                        borderRadius: BorderRadius.circular(17),
+                        child: Icon(
+                          Icons.notifications_rounded,
+                          color: pallete.primaryDark(),
+                        ),
                       ),
-                    ),
+                    ],
                   ),
-                  const SizedBox(height: 10),
-                  Text(
-                    "30% Daily Progress",
-                    style: TextStyle(
-                      color: pallete.primaryLight(),
-                      fontSize: getWidth(12),
-                    ),
+                ),
+                SingleChildScrollView(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const SizedBox(height: 70),
+                      Text(
+                        "Hello, ${box.read('name').toString().split(" ")[0]} 👋",
+                        style: TextStyle(
+                          color: pallete.primaryDark(),
+                          fontSize: getWidth(20),
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Text(
+                        "What did you do sustainable today?",
+                        style: TextStyle(
+                          color: pallete.primaryDark(),
+                          fontSize: getWidth(16),
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+                      Text(
+                        "Your Daily Score",
+                        style: TextStyle(
+                          color: pallete.primaryDark(),
+                          fontSize: getWidth(20),
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                      SizedBox(
+                        height: 8,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(8),
+                          child: LinearProgressIndicator(
+                            value: 0.3,
+                            color: pallete.primary(),
+                            backgroundColor:
+                                pallete.primaryDark().withOpacity(0.4),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                      Text(
+                        "30% Daily Progress",
+                        style: TextStyle(
+                          color: pallete.primaryLight(),
+                          fontSize: getWidth(12),
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+                      Text(
+                        "Categories",
+                        style: TextStyle(
+                          color: pallete.primaryDark(),
+                          fontSize: getWidth(20),
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                      SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        physics: const BouncingScrollPhysics(),
+                        child: Row(
+                          children: [
+                            Categories(pallete: pallete),
+                            const SizedBox(width: 20),
+                            Categories(pallete: pallete),
+                            const SizedBox(width: 20),
+                            Categories(pallete: pallete),
+                            const SizedBox(width: 20),
+                            Categories(pallete: pallete),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+                      Text(
+                        "Recent Campaigns",
+                        style: TextStyle(
+                          color: pallete.primaryDark(),
+                          fontSize: getWidth(20),
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                      SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        physics: const BouncingScrollPhysics(),
+                        child: Row(
+                          children: [
+                            CompaignCard(pallete: pallete),
+                            const SizedBox(width: 20),
+                            CompaignCard(pallete: pallete),
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
-                  const SizedBox(height: 20),
-                  Text(
-                    "Categories",
-                    style: TextStyle(
-                      color: pallete.primaryDark(),
-                      fontSize: getWidth(20),
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const SizedBox(height: 10),
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    physics: const BouncingScrollPhysics(),
-                    child: Row(
-                      children: [
-                        Categories(pallete: pallete),
-                        const SizedBox(width: 20),
-                        Categories(pallete: pallete),
-                        const SizedBox(width: 20),
-                        Categories(pallete: pallete),
-                        const SizedBox(width: 20),
-                        Categories(pallete: pallete),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(height: 20),
-                  Text(
-                    "Recent Campaigns",
-                    style: TextStyle(
-                      color: pallete.primaryDark(),
-                      fontSize: getWidth(20),
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const SizedBox(height: 10),
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    physics: const BouncingScrollPhysics(),
-                    child: Row(
-                      children: [
-                        CompaignCard(pallete: pallete),
-                        const SizedBox(width: 20),
-                        CompaignCard(pallete: pallete),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
-          ],
+          ),
         ),
       ),
     );
