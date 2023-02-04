@@ -20,6 +20,7 @@ class _ScreenState extends State<Screen> with SingleTickerProviderStateMixin {
   late AnimationController animationController;
   late Animation<double> animation, borderAnimation, scaleAnimation;
   bool isSideMenuClosed = true;
+  int current = 0;
 
   @override
   void initState() {
@@ -42,6 +43,12 @@ class _ScreenState extends State<Screen> with SingleTickerProviderStateMixin {
   void dispose() {
     animationController.dispose();
     super.dispose();
+  }
+
+  void tabChanged(int index) {
+    setState(() {
+      current = index;
+    });
   }
 
   @override
@@ -72,34 +79,39 @@ class _ScreenState extends State<Screen> with SingleTickerProviderStateMixin {
                   child: ClipRRect(
                     borderRadius: BorderRadius.all(
                         Radius.circular(borderAnimation.value)),
-                    child: const Home(),
+                    child: Home(
+                      tabChanged: tabChanged,
+                    ),
                   ),
                 ),
               ),
             ),
-            Positioned(
-              left: 20,
-              top: 20,
-              child: InkWell(
-                onTap: () {
-                  print("Tap");
-                  // print(SizeConfig.width * Global.drawerOffset * -1);
-                  if (isSideMenuClosed) {
-                    animationController.forward();
-                  } else {
-                    animationController.reverse();
-                  }
-                  setState(() {
-                    isSideMenuClosed = !isSideMenuClosed;
-                  });
-                },
-                borderRadius: BorderRadius.circular(17),
-                child: Icon(
-                  isSideMenuClosed ? Icons.menu : Icons.close,
-                  color: isSideMenuClosed ?  pallete.primaryDark() : pallete.background(),
+            if (current == 0)
+              Positioned(
+                left: 20,
+                top: 20,
+                child: InkWell(
+                  onTap: () {
+                    print("Tap");
+                    // print(SizeConfig.width * Global.drawerOffset * -1);
+                    if (isSideMenuClosed) {
+                      animationController.forward();
+                    } else {
+                      animationController.reverse();
+                    }
+                    setState(() {
+                      isSideMenuClosed = !isSideMenuClosed;
+                    });
+                  },
+                  borderRadius: BorderRadius.circular(17),
+                  child: Icon(
+                    isSideMenuClosed ? Icons.menu : Icons.close,
+                    color: isSideMenuClosed
+                        ? pallete.primaryDark()
+                        : pallete.background(),
+                  ),
                 ),
               ),
-            )
           ],
         ),
       ),

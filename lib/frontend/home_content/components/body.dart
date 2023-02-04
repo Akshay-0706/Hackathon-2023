@@ -169,14 +169,14 @@ class CompaignCard extends StatelessWidget {
         border: Border.all(
           color: pallete.primaryLight().withOpacity(0.4),
         ),
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(20),
       ),
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
             ClipRRect(
-              borderRadius: BorderRadius.circular(8),
+              borderRadius: BorderRadius.circular(20),
               child: CachedNetworkImage(
                 imageUrl:
                     "https://cleanbinheroes.com/wp-content/uploads/2021/07/taking-trash-out.jpg",

@@ -13,9 +13,8 @@ class SplashContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
+    return Stack(
+      alignment: AlignmentDirectional.bottomCenter,
       children: [
         DropShadow(
           opacity: 0.5,
@@ -25,18 +24,21 @@ class SplashContent extends StatelessWidget {
             opacity: opacity,
             child: SvgPicture.asset(
               "assets/icons/logo.svg",
-              width: getWidth(64),
+              width: getWidth(250),
             ),
           ),
         ),
-        Opacity(
-          opacity: opacity,
-          child: Text(
-            "Hackathon",
-            style: TextStyle(
-              color: Theme.of(context).primaryColorDark,
-              fontSize: getHeight(20),
-              fontWeight: FontWeight.bold,
+        Positioned(
+          bottom: 50,
+          child: Opacity(
+            opacity: opacity,
+            child: Text(
+              "Eco-Quest",
+              style: TextStyle(
+                color: Theme.of(context).primaryColorDark,
+                fontSize: getHeight(20),
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
         ),

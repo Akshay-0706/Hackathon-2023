@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../backend/Auth/user_account.dart';
+import '../../../backend/auth/user_account.dart';
 import '../../../size.dart';
 import 'signin_texts.dart';
 

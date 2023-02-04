@@ -9,7 +9,8 @@ import 'package:hackathon/size.dart';
 import 'package:hackathon/theme.dart';
 
 class HomeBody extends StatefulWidget {
-  const HomeBody({super.key});
+  const HomeBody({super.key, required this.tabChanged});
+  final Function tabChanged;
 
   @override
   State<HomeBody> createState() => _HomeBodyState();
@@ -27,6 +28,7 @@ class _HomeBodyState extends State<HomeBody> {
 
   void onChanged(int index) {
     if (current != index) {
+      widget.tabChanged(index);
       setState(() {
         current = index;
       });

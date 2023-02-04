@@ -69,7 +69,7 @@ class CustomColors {
   static Color background = const Color(0xffDEFAEC);
 
   // Dark mode colors
-  static Color? primaryDark = Color(0xFF37B80F);
+  static Color? primaryDark = const Color(0xFF37B80F);
   // static Color foregroundDark = const Color(0xffFCF7F8);
   static Color foregroundDark = const Color(0xffDEFAEC);
   // static Color foregroundAltDark = const Color(0xffD2D2D2);

@@ -53,6 +53,9 @@ dependencies:
   flutter_local_notifications: ^13.0.0
   google_sign_in: ^5.4.0
   provider: ^6.0.3
+  url_launcher: ^6.1.8
+  palette_generator: ^0.3.3+2
+  syncfusion_flutter_charts: ^20.4.48
 
 dev_dependencies:
   flutter_test:
@@ -80,6 +83,8 @@ flutter:
   assets:
      - assets/icons/
      - assets/extras/
+     - assets/images/
+     - assets/images/donations/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

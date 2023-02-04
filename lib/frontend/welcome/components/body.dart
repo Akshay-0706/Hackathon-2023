@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:hackathon/backend/Auth/account.dart';
+import 'package:hackathon/backend/auth/account.dart';
 import 'package:lottie/lottie.dart';
 
-import '../../../backend/Auth/user_account.dart';
+import '../../../backend/auth/user_account.dart';
 import '../../../size.dart';
 import '../../components/primary_btn.dart';
 import 'app_title.dart';
