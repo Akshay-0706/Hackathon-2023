@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:hackathon/frontend/community/community.dart';
 import 'package:hackathon/frontend/leaderboard/leaderboard.dart';
 import 'package:hackathon/frontend/tab_1/tab_1.dart';
 import 'package:hackathon/size.dart';
@@ -18,7 +19,7 @@ class _HomeBodyState extends State<HomeBody> {
   final List<Widget> tabs = [
     const Tab1(),
     const Tab1(),
-    const Tab1(),
+    const CommunityPage(),
     const LeaderBoard(),
   ];
 

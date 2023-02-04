@@ -25,10 +25,11 @@ class _LeaderBoardBodyState extends State<LeaderBoardBody> {
         await Database.getBalance(databaseRef, "akshay0706vhatkar@gmail.com");
     print('data shown');
     print(data);
-    setState(() {
-      progress = data['progress'];
-      level = data['level'];
-    });
+    if (mounted)
+      setState(() {
+        progress = data['progress'];
+        level = data['level'];
+      });
   }
 
   @override
@@ -59,8 +60,8 @@ class _LeaderBoardBodyState extends State<LeaderBoardBody> {
                             return user2['level'] - user1['level'];
                           },
                           itemBuilder: ((context, snapshot, animation, index) {
-                            print(snapshot.value);
-                            print(snapshot.key);
+                            // print(snapshot.value);
+                            // print(snapshot.key);
                             Map user = snapshot.value as Map;
                             user['key'] = snapshot.key;
                             return buildUser(
