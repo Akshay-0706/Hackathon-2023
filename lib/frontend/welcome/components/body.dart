@@ -2,7 +2,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:hackathon/backend/Auth/database.dart';
+import 'package:hackathon/backend/database/database.dart';
 import 'package:lottie/lottie.dart';
 
 import '../../../backend/auth/account.dart';

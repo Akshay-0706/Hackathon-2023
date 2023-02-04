@@ -4,7 +4,7 @@ import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:hackathon/backend/Auth/database.dart';
+import 'package:hackathon/backend/database/database.dart';
 import 'package:hackathon/theme.dart';
 
 import '../../../size.dart';
