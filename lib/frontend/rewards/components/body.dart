@@ -48,7 +48,7 @@ class _RewardsBodyState extends State<RewardsBody> {
                   ),
                 ),
                 Positioned(
-                  top: -5,
+                  top: -7,
                   right: -14,
                   child: SvgPicture.asset(
                     'assets/icons/coin.svg',
@@ -57,10 +57,100 @@ class _RewardsBodyState extends State<RewardsBody> {
                 ),
               ],
             ),
-          )
+          ),
+          SizedBox(height: getWidth(20)),
+          const MyWidget(),
         ],
       ),
     ));
   }
 }
 
+class MyWidget extends StatelessWidget {
+  const MyWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        child: Column(
+      children: [
+        buildRow(context),
+        buildRow(context),
+        buildRow(context),
+      ],
+    ));
+  }
+
+  buildRow(context) {
+    final width = MediaQuery.of(context).size.width - 70;
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 12.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          buildContainer(context, false),
+          buildContainer(context, true),
+        ],
+      ),
+    );
+  }
+
+  buildContainer(context, isExpired) {
+    final width = MediaQuery.of(context).size.width - 70;
+
+    return Container(
+      height: width / 2,
+      width: width / 2,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: Stack(
+        children: [
+          Positioned(
+              top: 100,
+              left: 10,
+              child: SvgPicture.asset(
+                'assets/icons/google_logo.svg',
+                width: width / 8,
+              )),
+          Positioned(bottom: 10, left: 10, child: Container()),
+          Positioned(
+              top: width / 4 - 10,
+              child: Container(
+                color: Colors.grey,
+                height: 20,
+                width: width / 2,
+                child: const Text(
+                  'Expired',
+                  textAlign: TextAlign.center,
+                ),
+              )),
+          Positioned(
+            top: 10,
+            left: 10,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: const [
+                Text(
+                  'Gift Card',
+                  style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black),
+                ),
+                Text(
+                  'Gift Voucher Rs 100',
+                  style: TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.grey),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
