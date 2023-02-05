@@ -28,6 +28,13 @@ class _ChallengesBodyState extends State<ChallengesBody> {
   var data;
   Map? daily;
   List<bool> chal = [false, false, false, false, false];
+  List<String> names = [
+    "Buy an ecofriendly product",
+    "Best out of Waste",
+    "Donation to Needy",
+    "Classfied and segregated Waste",
+    "Tree Plantation"
+  ];
 
   double? size = null;
   late final List<ChartData> chartData;
@@ -116,13 +123,9 @@ class _ChallengesBodyState extends State<ChallengesBody> {
                               ),
                             ),
                             InkWell(
-                              onTap: () => Navigator.push(
-                                context,
-                                CustomPageRoute(
-                                  context,
-                                  const LeaderBoard(),
-                                ),
-                              ),
+                              onTap: () {
+                                Navigator.pushNamed(context, '/leaderb');
+                              },
                               child: SvgPicture.asset(
                                 "assets/icons/leaderboard.svg",
                                 width: getWidth(25),
@@ -215,7 +218,7 @@ class _ChallengesBodyState extends State<ChallengesBody> {
                           5,
                           (index) => ChallengeCard(
                             pallete: pallete,
-                            challenge: "Buying an ecofriendly item",
+                            challenge: names[index],
                             index: index,
                             total: 17,
                             challengeIndex: chal[index],
