@@ -10,9 +10,12 @@ import 'package:google_mlkit_image_labeling/google_mlkit_image_labeling.dart';
 import 'package:hackathon/frontend/components/primary_btn.dart';
 import 'package:hackathon/theme.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:lottie/lottie.dart';
 
 import '../../../backend/database/database.dart';
 import '../../../size.dart';
+import '../../components/custom_page_route.dart';
+import '../../screen/screen.dart';
 
 class DetectImage extends StatefulWidget {
   const DetectImage({super.key});
@@ -26,8 +29,8 @@ class _DetectImageState extends State<DetectImage> {
   FirebaseDatabase databaseRef = FirebaseDatabase.instance;
   String? location;
   bool isClicked = false;
-
-  List<String> organic = [""];
+  bool isMatched = false;
+  bool detectionReady = false;
 
   Future<bool> detectImage() async {
     // print("called this");
@@ -58,6 +61,10 @@ class _DetectImageState extends State<DetectImage> {
 
     getImageLabels(image!);
 
+    setState(() {
+      detectionReady = true;
+    });
+
     print("Done");
 
     return xFileToImage(image);
@@ -74,6 +81,7 @@ class _DetectImageState extends State<DetectImage> {
     if (file != null && location == null) {
       detectImage();
     }
+
     return Scaffold(
       body: SafeArea(
           child: Column(
@@ -192,28 +200,108 @@ class _DetectImageState extends State<DetectImage> {
                 if (file != null) {
                   isClicked = true;
                   await detectImage();
-                  Navigator.pop(context);
+
+                  if (detectionReady) {
+                    showDialog(
+                      context: context,
+                      builder: (_) => WillPopScope(
+                        onWillPop: () async => false,
+                        child: AlertDialog(
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(8),
+                            ),
+                          ),
+                          title: Text(
+                            isMatched ? "Verified!" : "Not verified",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              color: pallete.primaryDark(),
+                              fontSize: getHeight(20),
+                            ),
+                          ),
+                          content: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Lottie.asset(
+                                isMatched
+                                    ? "assets/extras/lottie_donation_success.json"
+                                    : "assets/extras/lottie_donation_failed.json",
+                                width:
+                                    isMatched ? getHeight(120) : getHeight(240),
+                                height:
+                                    isMatched ? getHeight(120) : getHeight(240),
+                              ),
+                              Text(
+                                isMatched
+                                    ? "Uploaded image is verified and hence, the challenge is completed!"
+                                    : "Uploaded image is not verified, please choose another image",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  color: Theme.of(context)
+                                      .primaryColorDark
+                                      .withOpacity(0.8),
+                                  fontSize: getHeight(14),
+                                ),
+                              ),
+                              SizedBox(height: getHeight(10)),
+                              PrimaryBtn(
+                                primaryColor: pallete.primaryDark(),
+                                secondaryColor: Theme.of(context)
+                                    .primaryColorDark
+                                    .withOpacity(0.8),
+                                padding: 20,
+                                title: "Continue",
+                                tap: () {
+                                  Navigator.pushReplacement(
+                                    context,
+                                    CustomPageRoute(
+                                      context,
+                                      const Screen(),
+                                    ),
+                                  );
+                                },
+                                titleColor: pallete.background(),
+                                hasIcon: false,
+                              ),
+                            ],
+                          ),
+                          backgroundColor: pallete.background(),
+                        ),
+                      ),
+                    );
+                  }
                 }
               },
               titleColor: pallete.background(),
               hasIcon: false,
             ),
           ),
+          SizedBox(height: getHeight(20)),
         ],
       )),
     );
   }
-}
 
-void getImageLabels(XFile image) async {
-  final inputImage = InputImage.fromFilePath(image.path);
-  ImageLabeler imageLabeler = ImageLabeler(options: ImageLabelerOptions());
-  List<ImageLabel> labels = await imageLabeler.processImage(inputImage);
-  for (ImageLabel imageLabel in labels) {
-    String labelText = imageLabel.label;
-    double confidence = imageLabel.confidence;
-    print("Label : " + labelText);
-    print("Confidence : " + confidence.toString());
+  Future<bool> getImageLabels(XFile image) async {
+    List<String> organic = ["Food", "Vegetables"];
+    final inputImage = InputImage.fromFilePath(image.path);
+    ImageLabeler imageLabeler = ImageLabeler(options: ImageLabelerOptions());
+    List<ImageLabel> labels = await imageLabeler.processImage(inputImage);
+    for (ImageLabel imageLabel in labels) {
+      String labelText = imageLabel.label;
+      double confidence = imageLabel.confidence;
+      for (var element in organic) {
+        if (element == labelText) {
+          isMatched = true;
+          break;
+        }
+      }
+      if (isMatched) break;
+      print("Label : $labelText");
+      print("Confidence : $confidence");
+    }
+    imageLabeler.close();
+    return isMatched;
   }
-  imageLabeler.close();
 }

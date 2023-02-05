@@ -83,7 +83,7 @@ class _ChallengesBodyState extends State<ChallengesBody> {
 
     return SafeArea(
       child: Scaffold(
-        backgroundColor: pallete.primaryDark(),
+        backgroundColor: pallete.background(),
         body: TweenAnimationBuilder(
           tween: Tween<double>(begin: 0, end: 1),
           duration: const Duration(milliseconds: 500),
@@ -192,40 +192,59 @@ class _ChallengesBodyState extends State<ChallengesBody> {
                     ),
                   ),
                 const SizedBox(height: 10),
-                AnimatedContainer(
-                  duration: Global.drawerDuration,
+                Expanded(
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: Text(
-                      "Challenges for you",
-                      style: TextStyle(
-                        color: pallete.background(),
-                        fontSize: getWidth(22),
+                    padding: const EdgeInsets.all(10),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: pallete.primaryDark(),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const SizedBox(height: 20),
+                          AnimatedContainer(
+                            duration: Global.drawerDuration,
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 20),
+                              child: Text(
+                                "Challenges for you",
+                                style: TextStyle(
+                                  color: pallete.background(),
+                                  fontSize: getWidth(22),
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 20),
+                          Expanded(
+                            child: SingleChildScrollView(
+                              physics: const BouncingScrollPhysics(),
+                              child: Column(
+                                children: [
+                                  ...List.generate(
+                                    5,
+                                    (index) => ChallengeCard(
+                                      pallete: pallete,
+                                      challenge: "Buying an ecofriendly item",
+                                      index: index,
+                                      total: 17,
+                                      challengeIndex: chal[index],
+                                      check: check,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          )
+                        ],
                       ),
                     ),
                   ),
                 ),
-                const SizedBox(height: 10),
-                Expanded(
-                  child: SingleChildScrollView(
-                    physics: const BouncingScrollPhysics(),
-                    child: Column(
-                      children: [
-                        ...List.generate(
-                          5,
-                          (index) => ChallengeCard(
-                            pallete: pallete,
-                            challenge: "Buying an ecofriendly item",
-                            index: index,
-                            total: 17,
-                            challengeIndex: chal[index],
-                            check: check,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                )
               ],
             ),
           ),
