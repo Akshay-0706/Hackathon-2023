@@ -5,6 +5,7 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:hackathon/frontend/home_content/components/notifications_page.dart';
 import 'package:hackathon/size.dart';
 import 'package:hackathon/theme.dart';
 
@@ -41,7 +42,7 @@ class HomeContentBody extends StatelessWidget {
                             Container(
                               height: getHeight(25),
                               width: getWidth(70),
-                              padding: const EdgeInsets.only(right: 30),
+                              padding: const EdgeInsets.only(right: 40),
                               decoration: BoxDecoration(
                                 shape: BoxShape.rectangle,
                                 color: Colors.white,
@@ -76,7 +77,13 @@ class HomeContentBody extends StatelessWidget {
                         ),
                         GestureDetector(
                           onTap: () {
-                            print("Tap2");
+                            print("Tap");
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => NotificationPage(),
+                              ),
+                            );
                           },
                           // borderRadius: BorderRadius.circular(17),
                           child: Icon(

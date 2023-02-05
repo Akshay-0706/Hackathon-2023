@@ -16,7 +16,7 @@ class Database {
           Map user = snapshot.value as Map;
           data = user;
           // print("This is chart:");
-          // print(data);
+          print(data);
           return data;
         }
         // else {
@@ -44,6 +44,26 @@ class Database {
         }
       },
     ).catchError((error) {
+      throw error;
+    });
+    return data;
+  }
+
+  static Future getDrives(FirebaseDatabase databaseRef) async {
+    print('called');
+    var data;
+    DataSnapshot dataSnapshot;
+    await databaseRef.ref().child("Drives").get().then(
+      (snapshot) {
+        if (snapshot.exists) {
+          print(snapshot.value);
+          Map user = snapshot.value as Map;
+          data = user;
+          return data;
+        }
+      },
+    ).catchError((error) {
+      print(error);
       throw error;
     });
     return data;
