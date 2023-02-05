@@ -49,6 +49,26 @@ class Database {
     return data;
   }
 
+  static Future getDrives(FirebaseDatabase databaseRef) async {
+    print('called');
+    var data;
+    DataSnapshot dataSnapshot;
+    await databaseRef.ref().child("Drives").get().then(
+      (snapshot) {
+        if (snapshot.exists) {
+          print(snapshot.value);
+          Map user = snapshot.value as Map;
+          data = user;
+          return data;
+        }
+      },
+    ).catchError((error) {
+      print(error);
+      throw error;
+    });
+    return data;
+  }
+
   static void setData(FirebaseDatabase databaseRef, String email, String name,
       String img) async {
     final db = databaseRef.ref('Users').child(email.replaceAll(".", "_"));
