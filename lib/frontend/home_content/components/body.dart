@@ -8,6 +8,8 @@ import 'package:get_storage/get_storage.dart';
 import 'package:hackathon/size.dart';
 import 'package:hackathon/theme.dart';
 
+import '../../../global.dart';
+
 class HomeContentBody extends StatelessWidget {
   const HomeContentBody({super.key});
 
@@ -258,7 +260,7 @@ class CompaignCard extends StatelessWidget {
               blurRadius: 5,
             )
           ],
-          color: Color.fromARGB(255, 255, 255, 255),
+          color: themeChanger.isDarkMode ? Colors.black : Colors.white,
           borderRadius: BorderRadius.circular(20),
         ),
         child: Padding(
