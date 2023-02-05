@@ -35,6 +35,23 @@ class _NewsBodyState extends State<NewsBody> {
         appBar: AppBar(
           centerTitle: true,
           elevation: 2,
+          leading: InkWell(
+            onTap: () => Navigator.pop(context),
+            borderRadius: BorderRadius.circular(20),
+            child: Container(
+              width: getWidth(34),
+              decoration: const BoxDecoration(
+                shape: BoxShape.circle,
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(4),
+                child: Icon(
+                  Icons.arrow_back_ios_new_rounded,
+                  size: getWidth(24),
+                ),
+              ),
+            ),
+          ),
           title: Text(
             "Blogs & Resources",
             style: TextStyle(

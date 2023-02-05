@@ -3,10 +3,13 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hackathon/frontend/components/primary_btn.dart';
+import 'package:hackathon/frontend/screen/screen.dart';
 import 'package:hackathon/size.dart';
 import 'package:hackathon/theme.dart';
+import 'package:lottie/lottie.dart';
 
 import '../../../global.dart';
+import '../../components/custom_page_route.dart';
 
 class DonateBody extends StatelessWidget {
   const DonateBody({super.key, required this.title, required this.color});
@@ -217,32 +220,38 @@ class DonateBody extends StatelessWidget {
                           textInputAction: TextInputAction.next,
                           // controller: textEditingController,
                           keyboardType: TextInputType.number,
-                          style: TextStyle(fontSize: 35, color: Colors.black),
+                          cursorColor: pallete.primary(),
+                          style: TextStyle(
+                              fontSize: getWidth(30),
+                              color: pallete.background()),
                           textAlign: TextAlign.start,
                           decoration: InputDecoration(
                             prefixIconColor: Colors.black,
                             prefixIcon: Padding(
-                              padding: const EdgeInsets.only(left: 10.0),
+                              padding: EdgeInsets.only(left: 10.0),
                               child: Text(
                                 "\u{20B9}",
                                 style: TextStyle(
-                                  color: Colors.black,
+                                  color: pallete.background(),
                                   fontSize: 40,
                                 ),
                               ),
                             ),
                             focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(30.0),
-                                borderSide: BorderSide(color: Colors.grey)),
+                                borderSide:
+                                    const BorderSide(color: Colors.grey)),
                             enabledBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(30.0),
-                                borderSide: BorderSide(color: Colors.grey)),
-                            contentPadding: EdgeInsets.symmetric(vertical: 30),
+                                borderSide:
+                                    const BorderSide(color: Colors.grey)),
+                            contentPadding:
+                                const EdgeInsets.symmetric(vertical: 30),
                           ),
                         ),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     Text(
@@ -250,45 +259,46 @@ class DonateBody extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
-                        color: Colors.black,
+                        color: pallete.background(),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.all(10),
                       child: TextField(
                         // focusNode: node2,
                         minLines: 2,
                         maxLines: 3,
-                        cursorColor: Colors.black,
+                        cursorColor: pallete.primaryDark(),
 
                         textInputAction: TextInputAction.done,
-                        style: TextStyle(color: Colors.black),
+                        style: TextStyle(color: pallete.primaryDark()),
                         decoration: InputDecoration(
                           hintText: "Add a note...",
-                          hintStyle: TextStyle(color: Colors.black),
+                          hintStyle: TextStyle(
+                              color: pallete.primaryLight().withOpacity(0.9)),
                           filled: true,
-                          fillColor: Color.fromARGB(255, 238, 237, 237),
+                          fillColor: const Color.fromARGB(255, 238, 237, 237),
                           focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10.0),
-                              borderSide: BorderSide(
+                              borderSide: const BorderSide(
                                 color: Color.fromARGB(255, 242, 241, 241),
                               )),
                           enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10.0),
-                              borderSide: BorderSide(
+                              borderSide: const BorderSide(
                                 color: Color.fromARGB(255, 242, 241, 241),
                               )),
                         ),
                       ),
                     ),
-                    SizedBox(height: getHeight(20)),
+                    SizedBox(height: getHeight(5)),
                   ],
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               PrimaryBtn(
@@ -296,7 +306,70 @@ class DonateBody extends StatelessWidget {
                 secondaryColor: pallete.primaryDark().withOpacity(0.9),
                 padding: 0,
                 title: "Proceed",
-                tap: () {},
+                tap: () {
+                  showDialog(
+                    context: context,
+                    builder: (_) => WillPopScope(
+                      onWillPop: () async => false,
+                      child: AlertDialog(
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(8),
+                          ),
+                        ),
+                        title: Text(
+                          "Payment successful",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: pallete.primaryDark(),
+                            fontSize: getHeight(20),
+                          ),
+                        ),
+                        content: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Lottie.asset(
+                              "assets/extras/lottie_donation_success.json",
+                              width: getHeight(120),
+                              height: getHeight(120),
+                            ),
+                            Text(
+                              "Thank you!",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: Theme.of(context)
+                                    .primaryColorDark
+                                    .withOpacity(0.8),
+                                fontSize: getHeight(14),
+                              ),
+                            ),
+                            SizedBox(height: getHeight(10)),
+                            PrimaryBtn(
+                              primaryColor: pallete.primaryDark(),
+                              secondaryColor: Theme.of(context)
+                                  .primaryColorDark
+                                  .withOpacity(0.8),
+                              padding: 20,
+                              title: "Continue",
+                              tap: () {
+                                Navigator.pushReplacement(
+                                  context,
+                                  CustomPageRoute(
+                                    context,
+                                    const Screen(),
+                                  ),
+                                );
+                              },
+                              titleColor: pallete.background(),
+                              hasIcon: false,
+                            ),
+                          ],
+                        ),
+                        backgroundColor: pallete.background(),
+                      ),
+                    ),
+                  );
+                },
                 titleColor: pallete.background(),
                 hasIcon: false,
               ),

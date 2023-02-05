@@ -5,6 +5,7 @@ import 'package:flutter_svg/parser.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:hackathon/backend/database/database.dart';
 import 'package:hackathon/const.dart';
+import 'package:hackathon/frontend/challenges/components/detect_image.dart';
 import 'package:hackathon/frontend/leaderboard/leaderboard.dart';
 import 'package:hackathon/theme.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
@@ -34,15 +35,15 @@ class _ChallengesBodyState extends State<ChallengesBody> {
   dynamic getData() async {
     data = await Database.getBalance(databaseRef, GetStorage().read('email'));
     setState(() {
-      daily = data['dailyProgress'];
+      daily = data['dailyProgress'] ?? {};
       chartData = [
-        ChartData("Mon", daily!['Mon']),
-        ChartData("Tue", daily!['Tue']),
-        ChartData("Wed", daily!['Wed']),
-        ChartData("Thu", daily!['Thu']),
-        ChartData("Fri", daily!['Fri']),
-        ChartData("Sat", daily!['Sat']),
-        ChartData("Sun", daily!['Sun']),
+        ChartData("Mon", daily?['Mon'] ?? 0),
+        ChartData("Tue", daily?['Tue'] ?? 0),
+        ChartData("Wed", daily?['Wed'] ?? 0),
+        ChartData("Thu", daily?['Thu'] ?? 0),
+        ChartData("Fri", daily?['Fri'] ?? 0),
+        ChartData("Sat", daily?['Sat'] ?? 0),
+        ChartData("Sun", daily?['Sun'] ?? 0),
       ];
     });
   }
@@ -219,22 +220,6 @@ class _ChallengesBodyState extends State<ChallengesBody> {
                             total: 17,
                             challengeIndex: chal[index],
                             check: check,
-                            // reset: () {
-                            //   setState(() {
-                            //     chal[index] = !chal[index];
-                            //   });
-                            //   Database.setChallenge(
-                            //       databaseRef,
-                            //       GetStorage().read('email'),
-                            //       index + 1,
-                            //       chal[index] ? 1 : 0);
-                            //   Future.delayed(const Duration(milliseconds: 1000),
-                            //       () {
-                            //     setState(() {
-                            //       chal[index] = !chal[index];
-                            //     });
-                            //   });
-                            // },
                           ),
                         ),
                       ],
@@ -298,13 +283,24 @@ class ChallengeCard extends StatelessWidget {
                     ),
                   ),
                   Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.all(10),
-                      child: Text(
-                        challenge,
-                        style: TextStyle(
-                          color: pallete.background(),
-                          fontSize: getWidth(16),
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          CustomPageRoute(
+                            context,
+                            const DetectImage(),
+                          ),
+                        );
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.all(10),
+                        child: Text(
+                          challenge,
+                          style: TextStyle(
+                            color: pallete.background(),
+                            fontSize: getWidth(16),
+                          ),
                         ),
                       ),
                     ),

@@ -51,6 +51,17 @@ class _ScreenState extends State<Screen> with SingleTickerProviderStateMixin {
     });
   }
 
+  void onClicked() {
+    if (isSideMenuClosed) {
+      animationController.forward();
+    } else {
+      animationController.reverse();
+    }
+    setState(() {
+      isSideMenuClosed = !isSideMenuClosed;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     Pallete pallete = Pallete(context);
@@ -59,12 +70,7 @@ class _ScreenState extends State<Screen> with SingleTickerProviderStateMixin {
         backgroundColor: pallete.primaryDark(),
         body: Stack(
           children: [
-            Transform.translate(
-              offset: Offset(
-                  animation.value * SizeConfig.width * Global.drawerOffset * -1,
-                  0),
-              child: const SideMenu(),
-            ),
+            const SideMenu(),
             Transform(
               alignment: Alignment.center,
               transform: Matrix4.identity()
@@ -79,8 +85,13 @@ class _ScreenState extends State<Screen> with SingleTickerProviderStateMixin {
                   child: ClipRRect(
                     borderRadius: BorderRadius.all(
                         Radius.circular(borderAnimation.value)),
-                    child: Home(
-                      tabChanged: tabChanged,
+                    child: GestureDetector(
+                      onTap: () {
+                        if (!isSideMenuClosed) onClicked();
+                      },
+                      child: Home(
+                        tabChanged: tabChanged,
+                      ),
                     ),
                   ),
                 ),
@@ -92,16 +103,9 @@ class _ScreenState extends State<Screen> with SingleTickerProviderStateMixin {
                 top: 20,
                 child: InkWell(
                   onTap: () {
-                    print("Tap");
+                    // print("Tap");
                     // print(SizeConfig.width * Global.drawerOffset * -1);
-                    if (isSideMenuClosed) {
-                      animationController.forward();
-                    } else {
-                      animationController.reverse();
-                    }
-                    setState(() {
-                      isSideMenuClosed = !isSideMenuClosed;
-                    });
+                    onClicked();
                   },
                   borderRadius: BorderRadius.circular(17),
                   child: Icon(
