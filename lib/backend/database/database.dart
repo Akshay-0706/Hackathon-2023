@@ -7,6 +7,7 @@ import 'package:get_storage/get_storage.dart';
 class Database {
   static Future getBalance(FirebaseDatabase databaseRef, String email) async {
     // late double balance;
+    // print("This is new");
     email = email.replaceAll(".", "_");
     var data;
     await databaseRef.ref().child("Users/$email").get().then(
@@ -14,6 +15,8 @@ class Database {
         if (snapshot.exists) {
           Map user = snapshot.value as Map;
           data = user;
+          // print("This is chart:");
+          // print(data);
           return data;
         }
         // else {
@@ -72,5 +75,16 @@ class Database {
     };
 
     await db.set(data);
+  }
+
+  static void setChallenge(
+      FirebaseDatabase databaseRef, String email, int c, int set) {
+    email = email.replaceAll(".", "_");
+    final db = databaseRef.ref('Users/$email').child('DailyChallenges/C$c');
+
+    Map data = {"isDone": set};
+
+    // db.update(data);
+    db.set(data);
   }
 }
