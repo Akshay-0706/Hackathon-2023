@@ -4,9 +4,9 @@ import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:hackathon/backend/Auth/database.dart';
 import 'package:hackathon/theme.dart';
 
+import '../../../backend/database/database.dart';
 import '../../../size.dart';
 
 class LeaderBoardBody extends StatefulWidget {
@@ -23,7 +23,7 @@ class _LeaderBoardBodyState extends State<LeaderBoardBody> {
 
   void getData() async {
     final data =
-        await Database.getBalance(databaseRef, "akshay0706vhatkar@gmail.com");
+        await Database.getBalance(databaseRef, GetStorage().read('email'));
     print('data shown');
     print(data);
     if (mounted)

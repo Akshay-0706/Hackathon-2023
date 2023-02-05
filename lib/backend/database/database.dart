@@ -30,6 +30,7 @@ class Database {
 
   static Future getCommunity(FirebaseDatabase databaseRef) async {
     var data;
+    DataSnapshot dataSnapshot;
     await databaseRef.ref().child("Community").get().then(
       (snapshot) {
         if (snapshot.exists) {
@@ -54,17 +55,20 @@ class Database {
     await db.set(data);
   }
 
-  static void createPost(
-      FirebaseDatabase databaseRef, String img, String desc) async {
+  static void createPost(FirebaseDatabase databaseRef, String img, String title,
+      String userImg, String name, String desc) async {
     final db = databaseRef
         .ref('Community')
         .child('/P${Random().nextInt(1000).toString()}');
     Map data = {
+      "title": title,
       "desc": desc,
       "img": img,
+      "userImg": userImg,
       "likes": 0,
+      "name": name,
       "timestamp": DateTime.now().toString(),
-      "user": GetStorage().read("email")
+      "user": GetStorage().read("email"),
     };
 
     await db.set(data);

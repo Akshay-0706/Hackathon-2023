@@ -22,12 +22,10 @@ class _HomeBodyState extends State<HomeBody> {
 
   final List<Widget> tabs = [
     const HomeContent(),
-    const CommunityPage(),
+    const Community(),
     const Challenges(),
     const Donations(),
   ];
-
-  
 
   void onChanged(int index) {
     if (current != index) {
@@ -109,7 +107,7 @@ class NavItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final List<String> iconPath = [
       "assets/icons/home.svg",
-      "assets/icons/article.svg",
+      "assets/icons/community.svg",
       "assets/icons/challenges.svg",
       "assets/icons/donation.svg",
     ];

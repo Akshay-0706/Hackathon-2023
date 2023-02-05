@@ -30,6 +30,10 @@ class _ChallengesBodyState extends State<ChallengesBody> {
     ChartData("Sun", 8),
   ];
 
+  void check(int index) {
+    print(index);
+  }
+
   @override
   Widget build(BuildContext context) {
     Pallete pallete = Pallete(context);
@@ -168,17 +172,18 @@ class _ChallengesBodyState extends State<ChallengesBody> {
                             index: index,
                             total: 17,
                             challengeDone: challengeDone,
-                            reset: () {
-                              setState(() {
-                                challengeDone = !challengeDone;
-                              });
-                              Future.delayed(const Duration(milliseconds: 1000),
-                                  () {
-                                setState(() {
-                                  challengeDone = !challengeDone;
-                                });
-                              });
-                            },
+                            check: check,
+                            // reset: () {
+                            // setState(() {
+                            //   challengeDone = !challengeDone;
+                            // });
+                            // Future.delayed(const Duration(milliseconds: 1000),
+                            //     () {
+                            //   setState(() {
+                            //     challengeDone = !challengeDone;
+                            //   });
+                            // });
+                            // },
                           ),
                         ),
                       ],
@@ -201,7 +206,7 @@ class ChallengeCard extends StatelessWidget {
     required this.challenge,
     required this.index,
     required this.total,
-    required this.reset,
+    required this.check,
     required this.challengeDone,
   }) : super(key: key);
 
@@ -209,7 +214,7 @@ class ChallengeCard extends StatelessWidget {
   final String challenge;
   final int index, total;
   final bool challengeDone;
-  final VoidCallback reset;
+  final Function check;
 
   @override
   Widget build(BuildContext context) {
@@ -228,15 +233,14 @@ class ChallengeCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   InkWell(
-                    onTap: reset,
+                    onTap: () => check(index),
                     borderRadius: BorderRadius.circular(20),
                     child: Container(
                       width: 20,
                       height: 20,
                       decoration: BoxDecoration(
                           border: Border.all(
-                            color:
-                                Global.colors[index % total],
+                            color: Global.colors[index % total],
                           ),
                           shape: BoxShape.circle),
                       child: Icon(Icons.check, size: challengeDone ? 20 : 0),
