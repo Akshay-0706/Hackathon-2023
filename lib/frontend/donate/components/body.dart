@@ -18,10 +18,11 @@ class DonateBody extends StatelessWidget {
     Pallete pallete = Pallete(context);
     return SafeArea(
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         backgroundColor: color.withOpacity(0.2),
         body: Padding(
           padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
-          child: Column(
+          child: ListView(
             children: [
               SizedBox(height: getHeight(20)),
               Row(
@@ -171,7 +172,7 @@ class DonateBody extends StatelessWidget {
                       ),
                       child: Column(
                         children: [
-                          SizedBox(height: getHeight(60)),
+                          SizedBox(height: getHeight(20)),
                           Text(
                             "Invoice from Global SDG",
                             style: TextStyle(
@@ -187,7 +188,7 @@ class DonateBody extends StatelessWidget {
                               fontSize: getWidth(14),
                             ),
                           ),
-                          SizedBox(height: getHeight(40)),
+                          SizedBox(height: getHeight(20)),
                         ],
                       ),
                     ),
@@ -208,53 +209,78 @@ class DonateBody extends StatelessWidget {
                       ),
                     ),
                     SizedBox(height: getHeight(20)),
-                    Text(
-                      "\u{20B9} 0",
-                      style: TextStyle(
-                        color: pallete.background(),
-                        fontSize: getWidth(34),
+                    Center(
+                      child: SizedBox(
+                        width: 200,
+                        child: TextField(
+                          autofocus: true,
+                          textInputAction: TextInputAction.next,
+                          // controller: textEditingController,
+                          keyboardType: TextInputType.number,
+                          style: TextStyle(fontSize: 35, color: Colors.black),
+                          textAlign: TextAlign.start,
+                          decoration: InputDecoration(
+                            prefixIconColor: Colors.black,
+                            prefixIcon: Padding(
+                              padding: const EdgeInsets.only(left: 10.0),
+                              child: Text(
+                                "\u{20B9}",
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 40,
+                                ),
+                              ),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(30.0),
+                                borderSide: BorderSide(color: Colors.grey)),
+                            enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(30.0),
+                                borderSide: BorderSide(color: Colors.grey)),
+                            contentPadding: EdgeInsets.symmetric(vertical: 30),
+                          ),
+                        ),
                       ),
                     ),
-                    SizedBox(height: getHeight(20)),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Text(
+                      "Add a Note(Optional)",
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      child: InkWell(
-                        onTap: () {},
-                        borderRadius: BorderRadius.circular(20),
-                        splashColor: pallete.background(),
-                        child: Container(
-                          width: double.infinity,
-                          height: getHeight(50),
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                              gradient: LinearGradient(
-                                  begin: Alignment.topLeft,
-                                  end: Alignment.bottomRight,
-                                  colors: [
-                                    pallete.background(),
-                                    pallete.background().withOpacity(0.9),
-                                  ],
-                                  stops: const [
-                                    0,
-                                    1
-                                  ]),
-                              boxShadow: [
-                                BoxShadow(
-                                    color:
-                                        pallete.background().withOpacity(0.2),
-                                    blurRadius: 10,
-                                    spreadRadius: 5,
-                                    offset: const Offset(3, 5))
-                              ]),
-                          child: Center(
-                            child: Text(
-                              "Add a note",
-                              style: TextStyle(
-                                  color: pallete.primaryDark(),
-                                  fontSize: getWidth(16),
-                                  fontWeight: FontWeight.bold),
-                            ),
-                          ),
+                      padding: const EdgeInsets.all(8.0),
+                      child: TextField(
+                        // focusNode: node2,
+                        minLines: 2,
+                        maxLines: 3,
+                        cursorColor: Colors.black,
+
+                        textInputAction: TextInputAction.done,
+                        style: TextStyle(color: Colors.black),
+                        decoration: InputDecoration(
+                          hintText: "Add a note...",
+                          hintStyle: TextStyle(color: Colors.black),
+                          filled: true,
+                          fillColor: Color.fromARGB(255, 238, 237, 237),
+                          focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10.0),
+                              borderSide: BorderSide(
+                                color: Color.fromARGB(255, 242, 241, 241),
+                              )),
+                          enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10.0),
+                              borderSide: BorderSide(
+                                color: Color.fromARGB(255, 242, 241, 241),
+                              )),
                         ),
                       ),
                     ),
@@ -262,7 +288,9 @@ class DonateBody extends StatelessWidget {
                   ],
                 ),
               ),
-              const Spacer(),
+              SizedBox(
+                height: 20,
+              ),
               PrimaryBtn(
                 primaryColor: pallete.primaryDark(),
                 secondaryColor: pallete.primaryDark().withOpacity(0.9),
