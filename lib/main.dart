@@ -1,13 +1,15 @@
-import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:hackathon/const.dart';
 import 'package:hackathon/routes.dart';
 import 'package:hackathon/theme.dart';
 
 import 'firebase_options.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+
+import 'global.dart';
 
 const NotificationDetails notificationDetails =
     NotificationDetails(android: details);
@@ -32,7 +34,7 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  final savedThemeMode = await AdaptiveTheme.getThemeMode();
+
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
@@ -59,16 +61,11 @@ Future main() async {
 
       try {
         await flutterLocalNotificationsPlugin.initialize(
-          InitializationSettings(
+          const InitializationSettings(
             android: AndroidInitializationSettings('@mipmap/ic_launcher'),
           ),
         );
-      } on Exception catch (e, s) {
-        print('akfkf');
-        print(e);
-        print(s);
-        // TODO
-      }
+      } on Exception catch (e) {}
 
       try {
         await flutterLocalNotificationsPlugin.show(
@@ -77,38 +74,72 @@ Future main() async {
           message.notification!.body,
           notificationDetails,
         );
-      } catch (e, s) {
-        print('akfkf2');
-        print(e);
-        print(s);
-        // TODO
-      }
+      } catch (e) {}
     }
   });
 
   await GetStorage.init();
-  runApp(MyApp(savedThemeMode: savedThemeMode));
+  runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
-  final AdaptiveThemeMode? savedThemeMode;
+class MyApp extends StatefulWidget {
+  const MyApp({super.key});
 
-  const MyApp({super.key, this.savedThemeMode});
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  final box = GetStorage();
+
+  @override
+  void initState() {
+    themeChanger.isDarkMode = themeChanger.currentTheme() == ThemeMode.system
+        ? WidgetsBinding.instance.window.platformBrightness == Brightness.dark
+        : themeChanger.currentTheme() == ThemeMode.dark;
+
+    final window = WidgetsBinding.instance.window;
+
+    if (box.read("theme") == "Light") {
+      themeChanger.changeThemeMode("Light");
+    }
+
+    if (box.read("theme") == "Dark") {
+      themeChanger.changeThemeMode("Dark");
+    }
+
+    window.onPlatformBrightnessChanged = () {
+      setState(() {
+        themeChanger.isDarkMode =
+            themeChanger.currentTheme() == ThemeMode.system
+                ? WidgetsBinding.instance.window.platformBrightness ==
+                    Brightness.dark
+                : themeChanger.currentTheme() == ThemeMode.dark;
+      });
+
+      if (themeChanger.theme == "Auto") {
+        setState(() {
+          themeChanger.changeThemeMode("Auto");
+        });
+      }
+    };
+
+    themeChanger.addListener(() {
+      setState(() {});
+    });
+
+    super.initState();
+  }
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return AdaptiveTheme(
-      light: AppTheme.lightTheme(),
-      dark: AppTheme.darkTheme(),
-      initial: savedThemeMode ?? AdaptiveThemeMode.system,
-      builder: (theme, darkTheme) => MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Flutter Demo',
-        theme: theme,
-        darkTheme: darkTheme,
-        routes: routes,
-      ),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Flutter Demo',
+      theme: AppTheme.lightTheme(),
+      darkTheme: AppTheme.darkTheme(),
+      routes: routes,
     );
   }
 }

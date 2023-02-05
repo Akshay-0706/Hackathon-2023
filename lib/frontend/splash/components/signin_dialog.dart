@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../backend/Auth/user_account.dart';
+import '../../../backend/auth/user_account.dart';
 import '../../../size.dart';
 import 'signin_texts.dart';
 
@@ -13,7 +13,7 @@ class SigninDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return FutureBuilder(
       future: UserAccount.googleLogin().then((value) {
-        Navigator.pushReplacementNamed(context, "/home");
+        Navigator.pushReplacementNamed(context, "/screen");
       }),
       builder: (context, snapshot) {
         return Dialog(

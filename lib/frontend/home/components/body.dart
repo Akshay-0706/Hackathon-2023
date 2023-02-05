@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:hackathon/frontend/tab_1/tab_1.dart';
+import 'package:hackathon/frontend/community/community.dart';
+import 'package:hackathon/frontend/challenges/challenges.dart';
+import 'package:hackathon/frontend/donations/donations.dart';
+import 'package:hackathon/frontend/news/news.dart';
+import 'package:hackathon/frontend/side_menu/side_menu.dart';
+import 'package:hackathon/frontend/home_content/home_content.dart';
 import 'package:hackathon/size.dart';
 import 'package:hackathon/theme.dart';
 
 class HomeBody extends StatefulWidget {
-  const HomeBody({super.key});
+  const HomeBody({super.key, required this.tabChanged});
+  final Function tabChanged;
 
   @override
   State<HomeBody> createState() => _HomeBodyState();
@@ -15,11 +21,15 @@ class _HomeBodyState extends State<HomeBody> {
   int current = 0;
 
   final List<Widget> tabs = [
-    const Tab1(),
+    const HomeContent(),
+    const Community(),
+    const Challenges(),
+    const Donations(),
   ];
 
   void onChanged(int index) {
     if (current != index) {
+      widget.tabChanged(index);
       setState(() {
         current = index;
       });
@@ -40,9 +50,9 @@ class _HomeBodyState extends State<HomeBody> {
             borderRadius: BorderRadius.circular(24),
             boxShadow: [
               BoxShadow(
-                  offset: Offset(0, 3),
+                  offset: const Offset(0, 3),
                   blurRadius: 8,
-                  color: pallete.primaryDark().withOpacity(0.3)),
+                  color: pallete.background().withOpacity(0.5)),
             ],
           ),
           child: Row(
@@ -71,17 +81,11 @@ class _HomeBodyState extends State<HomeBody> {
                 pallete: pallete,
                 onChanged: onChanged,
               ),
-              NavItem(
-                index: 4,
-                current: current,
-                pallete: pallete,
-                onChanged: onChanged,
-              ),
             ],
           ),
         ),
       ),
-      body: Tab1(),
+      body: tabs[current],
     );
   }
 }
@@ -97,15 +101,21 @@ class NavItem extends StatelessWidget {
   final int index, current;
   final Pallete pallete;
   final Function onChanged;
-  final int totalItems = 5;
+  final int totalItems = 4;
 
   @override
   Widget build(BuildContext context) {
+    final List<String> iconPath = [
+      "assets/icons/home.svg",
+      "assets/icons/community.svg",
+      "assets/icons/challenges.svg",
+      "assets/icons/donation.svg",
+    ];
     final double itemWidth = (SizeConfig.width - 40) * (1 / totalItems);
     return InkWell(
       onTap: () => onChanged(index),
       borderRadius: BorderRadius.circular(24),
-      child: Container(
+      child: SizedBox(
         width: itemWidth,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -121,7 +131,7 @@ class NavItem extends StatelessWidget {
             ),
             const SizedBox(height: 5),
             SvgPicture.asset(
-              "assets/icons/account.svg",
+              iconPath[index],
               color: current == index
                   ? pallete.background()
                   : pallete.background().withOpacity(0.5),

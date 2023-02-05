@@ -3,18 +3,14 @@ import 'package:flutter/material.dart';
 import 'components/body.dart';
 
 class Home extends StatelessWidget {
-  const Home({super.key});
+  const Home({super.key, required this.tabChanged});
+  final Function tabChanged;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xff1a5f7a),
-      body: Column(
-        children: [
-          SizedBox(
-            height: 100,
-          ),
-        ],
+      body: HomeBody(
+        tabChanged: tabChanged,
       ),
     );
   }
