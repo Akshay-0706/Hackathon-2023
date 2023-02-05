@@ -84,7 +84,7 @@ class SideMenuBody extends StatelessWidget {
               title: "Rewards",
               iconPath: "assets/icons/rewards.svg",
               clicked: () {
-                print("object");
+                Navigator.pushNamed(context, '/reward');
               },
             ),
             SizedBox(height: getHeight(20)),

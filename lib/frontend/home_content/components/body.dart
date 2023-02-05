@@ -39,12 +39,12 @@ class HomeContentBody extends StatelessWidget {
                             Container(
                               height: getHeight(25),
                               width: getWidth(70),
-                              padding: const EdgeInsets.only(right: 40),
+                              padding: const EdgeInsets.only(right: 30),
                               decoration: BoxDecoration(
                                 shape: BoxShape.rectangle,
                                 color: Colors.white,
                                 border: Border.all(
-                                  color: Colors.white,
+                                  color: Colors.yellow,
                                   width: 3,
                                 ),
                                 borderRadius: BorderRadius.circular(10),
@@ -61,7 +61,7 @@ class HomeContentBody extends StatelessWidget {
                             ),
                             Positioned(
                               top: -5,
-                              right: 0,
+                              right: -5,
                               child: SvgPicture.asset(
                                 'assets/icons/coin.svg',
                                 height: 35,
@@ -146,24 +146,32 @@ class HomeContentBody extends StatelessWidget {
                     child: Row(
                       children: [
                         Categories(
-                            pallete: pallete,
-                            logo: 'assets/icons/newPost.svg',
-                            name: 'New Post'),
+                          pallete: pallete,
+                          logo: 'assets/icons/newPost.svg',
+                          name: 'New Post',
+                          route: '/newpost',
+                        ),
                         const SizedBox(width: 20),
                         Categories(
-                            pallete: pallete,
-                            logo: 'assets/icons/reward.svg',
-                            name: 'Rewards'),
+                          pallete: pallete,
+                          logo: 'assets/icons/reward.svg',
+                          name: 'Rewards',
+                          route: '/reward',
+                        ),
                         const SizedBox(width: 20),
                         Categories(
-                            pallete: pallete,
-                            logo: 'assets/icons/drive.svg',
-                            name: 'Drive'),
+                          pallete: pallete,
+                          logo: 'assets/icons/drive.svg',
+                          name: 'Drive',
+                          route: '/drive',
+                        ),
                         const SizedBox(width: 20),
                         Categories(
-                            pallete: pallete,
-                            logo: 'assets/icons/leaderboard.svg',
-                            name: 'LeaderBoard'),
+                          pallete: pallete,
+                          logo: 'assets/icons/leaderboard.svg',
+                          name: 'LeaderBoard',
+                          route: '/leaderb',
+                        ),
                       ],
                     ),
                   ),
@@ -371,48 +379,55 @@ class Categories extends StatelessWidget {
     required this.pallete,
     required this.logo,
     required this.name,
+    required this.route,
   }) : super(key: key);
 
   final Pallete pallete;
   final String logo;
   final String name;
+  final String route;
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Container(
-          width: getWidth(70),
-          height: getWidth(70),
-          decoration: BoxDecoration(
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.1),
-                offset: const Offset(1, 2),
-                blurRadius: 5,
-              )
-            ],
-            color: Color.fromARGB(255, 255, 255, 255),
-            borderRadius: BorderRadius.circular(8),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(10),
-            child: SvgPicture.asset(
-              logo,
+    return InkWell(
+      onTap: () {
+        Navigator.pushNamed(context, route);
+      },
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Container(
+            width: getWidth(70),
+            height: getWidth(70),
+            decoration: BoxDecoration(
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.1),
+                  offset: const Offset(1, 2),
+                  blurRadius: 5,
+                )
+              ],
+              color: Color.fromARGB(255, 255, 255, 255),
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(10),
+              child: SvgPicture.asset(
+                logo,
+              ),
             ),
           ),
-        ),
-        const SizedBox(height: 10),
-        Text(
-          name,
-          style: TextStyle(
-            color: pallete.primaryDark(),
-            fontSize: getWidth(14),
-            fontWeight: FontWeight.bold,
+          const SizedBox(height: 10),
+          Text(
+            name,
+            style: TextStyle(
+              color: pallete.primaryDark(),
+              fontSize: getWidth(14),
+              fontWeight: FontWeight.bold,
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

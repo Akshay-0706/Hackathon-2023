@@ -19,7 +19,7 @@ class _RewardPageBodyState extends State<Reward> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: RewardBody(),
+      body: RewardsBody(),
     );
   }
 }
