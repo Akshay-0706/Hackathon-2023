@@ -30,6 +30,42 @@ class HomeContentBody extends StatelessWidget {
                   child: Row(
                     children: [
                       const Spacer(),
+                      Stack(
+                        clipBehavior: Clip.none,
+                        children: [
+                          Container(
+                            height: 40,
+                            width: 100,
+                            padding: const EdgeInsets.only(right: 50),
+                            decoration: BoxDecoration(
+                              shape: BoxShape.rectangle,
+                              color: Colors.yellow,
+                              border: Border.all(
+                                color: Colors.white,
+                                width: 3,
+                              ),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            alignment: Alignment.center,
+                            child: Text(
+                              '1234',
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: getWidth(16),
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                          Positioned(
+                            top: 30,
+                            right: 0,
+                            child: SvgPicture.asset(
+                              'assets/icons/coin.svg',
+                              height: 70,
+                            ),
+                          ),
+                        ],
+                      ),
                       InkWell(
                         onTap: () {
                           print("Tap");
